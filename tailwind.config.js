@@ -16,7 +16,7 @@ export default {
         silver: '#F5F7FA',
         white: '#FFFFFF',
         error: '#E53835',
-        success: '#2E7D31',,
+        success: '#2E7D31',
       },
     },
   },
