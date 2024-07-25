@@ -18,7 +18,7 @@ export default {
         error: '#E53835',
         success: '#2E7D31',
       },
-      fontSize: {
+       fontSize: {
         'xs': '.75rem',     // ukuran ekstra kecil
         'sm': '.875rem',    // ukuran kecil
         'base': '1rem',     // ukuran dasar (biasanya 16px)
