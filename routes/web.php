@@ -7,6 +7,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/beranda', function () {
+    return view('beranda');
+});
+
 Route::get('/login', function () {
     return view('login');
 });
