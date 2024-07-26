@@ -21,12 +21,24 @@
         <p class="font-extralight text-lg xl:text-lg text-center mb-4">
             Antrian PST
         </p>
-        <form>
+
+        @if(Session::has('loginError'))
+            <div id="alert" class="relative bg-red-300 text-red-800 border border-red-400 p-4 rounded mb-4 flex items-start">
+                <button class="absolute top-2 right-2 text-red-800 hover:text-red-600" onclick="document.getElementById('alert').style.display='none';">
+                    &times;
+                </button>
+                {{ session('loginError') }}
+            </div>
+        @endif
+
+        <form action="/login" method="POST">
+            @csrf
             <div class="mb-4">
                 <label for="username" class="block text-black text-sm md:text-sm font-medium">Username</label>
                 <input
+                  name="username"
                   type="text"
-                  id="floating_username"
+                  id="username"
                   class="block mt-2 py-2 lg:py-2 pl-5 w-full text-sm text-grey bg-silver rounded-md border border-gray-300 appearance-none focus:outline-none focus:ring-0 peer"
                   placeholder=" "
                   required
@@ -35,10 +47,12 @@
             <div class="mb-6">
                 <label for="username" class="block text-black text-sm font-medium">Password</label>
                 <input 
+                    name="password"
                     type="password" 
                     id="password" 
                     class="block mt-2 py-2 lg:py-2 pl-5 w-full text-sm text-grey bg-silver rounded-md border border-gray-300 appearance-none focus:outline-none focus:ring-0 peer"
-                />
+                    required
+                    />
             </div>
             <button type="submit" class="w-full bg-birunavbar text-white p-2 rounded hover:bg-blue-600 font-bold">Login</button>
         </form>
