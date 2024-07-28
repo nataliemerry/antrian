@@ -13,7 +13,7 @@
             <!-- Bagian kanan (kolom kedua) untuk teks -->
             <div class="flex flex-col justify-center bg-biru">
                 <h2 class="text-xl font-bold text-white">Konsultasi</h2>
-                <p class="text-3xl text-white font-bold">1</p>
+                <p class="text-3xl text-white font-bold">{{ $konsultasiCount }}</p>
             </div>
         </div>
         <!-- Card 2 -->
@@ -25,7 +25,7 @@
             <!-- Bagian kanan (kolom kedua) untuk teks -->
             <div class="flex flex-col justify-center bg-hijau">
                 <h2 class="text-xl font-bold text-white">Permintaan Data</h2>
-                <p class="text-3xl text-white font-bold">1</p>
+                <p class="text-3xl text-white font-bold">{{ $permintaanDataCount }}</p>
             </div>
         </div>
         <!-- Card 3 -->
@@ -37,7 +37,7 @@
             <!-- Bagian kanan (kolom kedua) untuk teks -->
             <div class="flex flex-col justify-center bg-orange">
                 <h2 class="text-xl font-bold text-white">Lainnya</h2>
-                <p class="text-3xl text-white font-bold">1</p>
+                <p class="text-3xl text-white font-bold">{{ $lainnyaCount }}</p>
             </div>
         </div>
     </div>

@@ -1,8 +1,5 @@
 <x-layout title="Admin Antrian">
-    
-
     <div class="bg-white p-6 rounded-lg shadow mt-20 ml-64">
-
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-3xl font-bold">Daftar Antrian</h1>
             <button class="bg-orange hover:bg-amber-500 text-white px-4 py-2 rounded-md flex items-center">
@@ -18,78 +15,49 @@
         <table class="min-w-full bg-white">
             <thead>
                 <tr class="w-full bg-birubps text-white">
-                    <th class="w-1/12 text-center py-3 px-4 uppercase font-semibold text-sm ">ID</th>
+                    <th class="w-1/12 text-center py-3 px-4 uppercase font-semibold text-sm">No</th>
                     <th class="w-1/6 text-center py-3 px-4 uppercase font-semibold text-sm">Layanan</th>
                     <th class="w-1/6 text-center py-3 px-4 uppercase font-semibold text-sm">Nomor Antrian</th>
                     <th class="w-1/5 text-center py-3 px-4 uppercase font-semibold text-sm">Waktu Antri</th>
                     <th class="w-1/5 text-center py-3 px-4 uppercase font-semibold text-sm">Waktu Panggil</th>
+                    <th class="w-1/12 text-center py-3 px-4 uppercase font-semibold text-sm">ACTION</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="text-gray-700 p-0">
-                    <td class="w-1/12 text-center py-2 px-4">1</td>
-                    <td class="w-1/6 text-center py-3 px-4">Konsultasi</td>
-                    <td class="w-1/6 text-center py-3 px-4">A-1</td>
-                    <td class="w-1/5 text-center py-3 px-4">2024-07-17 08:00:00</td>
-                    <td class="w-1/5 text-center py-3 px-4">2024-07-17 08:00:00</td>
-                </tr>
-                <tr class="text-gray-700 p-0">
-                    <td class="w-1/12 text-center py-3 px-4">2</td>
-                    <td class="w-1/6 text-center py-3 px-4">Permintaan Data</td>
-                    <td class="w-1/6 text-center py-3 px-4">A-1</td>
-                    <td class="w-1/5 text-center py-3 px-4">2024-07-17 08:00:00</td>
-                    <td class="w-1/5 text-center py-3 px-4">2024-07-17 08:00:00</td>
-                </tr>
-                <tr class="text-gray-700">
-                    <td class="w-1/12 text-center py-3 px-4">3</td>
-                    <td class="w-1/6 text-center py-3 px-4">Konsultasi</td>
-                    <td class="w-1/6 text-center py-3 px-4">A-2</td>
-                    <td class="w-1/5 text-center py-3 px-4">2024-07-17 08:00:00</td>
-                    <td class="w-1/5 text-center py-3 px-4">NULL</td>
-                </tr>
-                <tr class="text-gray-700">
-                    <td class="w-1/12 text-center py-3 px-4">3</td>
-                    <td class="w-1/6 text-center py-3 px-4">Permintaan Data</td>
-                    <td class="w-1/6 text-center py-3 px-4">B-1</td>
-                    <td class="w-1/5 text-center py-3 px-4">2024-07-17 08:00:00</td>
-                    <td class="w-1/5 text-center py-3 px-4">NULL</td>
-                </tr>
-                <tr class="text-gray-700">
-                    <td class="w-1/12 text-center py-3 px-4">3</td>
-                    <td class="w-1/6 text-center py-3 px-4">Permintaan Data</td>
-                    <td class="w-1/6 text-center py-3 px-4">B-2</td>
-                    <td class="w-1/5 text-center py-3 px-4">2024-07-17 08:00:00</td>
-                    <td class="w-1/5 text-center py-3 px-4">NULL</td>
-                </tr>
-                <tr class="text-gray-700">
-                    <td class="w-1/12 text-center py-3 px-4">3</td>
-                    <td class="w-1/6 text-center py-3 px-4">Konsultasi</td>
-                    <td class="w-1/6 text-center py-3 px-4">A-3</td>
-                    <td class="w-1/5 text-center py-3 px-4">2024-07-17 08:00:00</td>
-                    <td class="w-1/5 text-center py-3 px-4">2024-07-17 08:00:00</td>
-                </tr>
-                <tr class="text-gray-700">
-                    <td class="w-1/12 text-center py-3 px-4">3</td>
-                    <td class="w-1/6 text-center py-3 px-4">Konsultasi</td>
-                    <td class="w-1/6 text-center py-3 px-4">A-4</td>
-                    <td class="w-1/5 text-center py-3 px-4">2024-07-17 08:00:00</td>
-                    <td class="w-1/5 text-center py-3 px-4">2024-07-17 08:00:00</td>
-                </tr>
-                <tr class="text-gray-700">
-                    <td class="w-1/12 text-center py-3 px-4">3</td>
-                    <td class="w-1/6 text-center py-3 px-4">Lainnya</td>
-                    <td class="w-1/6 text-center py-3 px-4">C-1</td>
-                    <td class="w-1/5 text-center py-3 px-4">2024-07-17 08:00:00</td>
-                    <td class="w-1/5 text-center py-3 px-4">2024-07-17 08:00:00</td>
-                </tr>
-                <tr class="text-gray-700">
-                    <td class="w-1/12 text-center py-3 px-4">3</td>
-                    <td class="w-1/6 text-center py-3 px-4">Lainnya</td>
-                    <td class="w-1/6 text-center py-3 px-4">C-2</td>
-                    <td class="w-1/5 text-center py-3 px-4">2024-07-17 08:00:00</td>
-                    <td class="w-1/5 text-center py-3 px-4">2024-07-17 08:00:00</td>
-                </tr>
+                @foreach ($queues as $queue)
+                    <tr class="text-gray-700 p-0">
+                        <td class="w-1/12 text-center py-2 px-4">{{  $loop->iteration }}</td>
+                        <td class="w-1/6 text-center py-3 px-4">{{ $queue->service_name }}</td>
+                        <td class="w-1/6 text-center py-3 px-4">{{ $queue->queue_number }}</td>
+                        <td class="w-1/5 text-center py-3 px-4">{{ $queue->created_at }}</td>
+                        <td class="w-1/5 text-center py-3 px-4">{{ $queue->called_at }}</td>
+                        <td class="w-1/12 text-center py-3 px-4">
+                            <form action="{{ url('/queues/' . $queue->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus antrian ini?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-error hover:bg-red-600 text-white font-bold text-sm rounded py-1 px-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <path d="M4 7l16 0" />
+                                        <path d="M10 11l0 6" />
+                                        <path d="M14 11l0 6" />
+                                        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                        <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                    </svg>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
+
+    <!-- Toastr Notifications -->
+    <script>
+        @if (session('status'))
+            toastr.success("{{ session('status') }}");
+        @endif
+    </script>
+    
 </x-layout>
