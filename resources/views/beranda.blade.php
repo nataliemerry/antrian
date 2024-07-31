@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Antrian PST</title>
     @vite('resources/css/app.css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <style>
-        /* CSS for checkbox hack to display the popup */
         #popup:checked ~ .popup-content {
             display: flex;
         }
@@ -27,21 +27,17 @@
         </div>
     </header>
 
-    <main class="bg-cover bg-center h-screen" style="background-image: url('img/bg bps.png'); font-family: 'Poppins', sans-serif;"> 
-        <div class="container mx-auto text-center py-8"> 
+    <main class="bg-cover bg-center h-screen" style="background-image: url('img/bg bps.png'); font-family: 'Poppins', sans-serif;">
+        <div class="container mx-auto text-center py-8">
             <h1 class="text-xl font-semibold text-white">SELAMAT DATANG DI</h1>
             <h2 class="text-3xl font-semibold mb-12 text-white">PELAYANAN STATISTIK TERPADU</h2>
-
-            {{-- @if (session('status'))
-                <p>{{ session('status') }}</p>
-            @endif --}}
             
             <div class="bg-white rounded-lg inline-block mb-10 w-full max-w-xs">
                 <div class="bg-[#D3D3D3] rounded-lg p-2 shadow-lg">
                     <h3 class="text-base font-semibold">ANTRIAN SAAT INI</h3>
                 </div>
                 <div class="p-4">
-                    <div class="text-4xl font-bold text-black">A-1</div>
+                    <div id="current-queue" class="text-4xl font-bold text-black">A-1</div>
                 </div>
             </div>
             <div class="flex justify-center items-center">
@@ -88,17 +84,40 @@
                 <h2 class="text-xl font-bold mb-4">Tambah Antrian</h2>
                 <form action="/queues" method="POST">
                     @csrf
-                    <label for="service" class="block mb-2 font-semibold text-left">Pilih Layanan Berikut</label>
+                    <label for="service_name" class="block mb-2 font-semibold text-left">Pilih Layanan Berikut</label>
                     <select name="service_name" id="service_name" class="mb-6 p-2 border rounded w-full">
-                        <option>Konsultasi</option>
-                        <option>Permintaan Data</option>
-                        <option>Lainnya</option>
+                        <option value="Konsultasi">Konsultasi</option>
+                        <option value="Permintaan Data">Permintaan Data</option>
+                        <option value="Lainnya">Lainnya</option>
                     </select>
                     <button type="submit" class="bg-[#567AC8] hover:bg-blue-600 text-white font-bold py-2 px-4 rounded cursor-pointer">TAMBAH</button>
                 </form>
             </div>
         </div>
-
     </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
+    <!-- Toastr Notifications -->
+    <script>
+        @if (session('status'))
+            toastr.options = {
+                "positionClass": "toast-bottom-right"
+            };
+            toastr.success("{{ session('status') }}");
+        @endif
+
+        console.log(window.Echo); // Debugging Echo object
+        if (typeof window.Echo !== 'undefined') {
+            window.Echo.channel('queue-channel')
+                .listen('QueueCalled', (event) => {
+                    console.log('QueueCalled event received:', event);
+                    document.getElementById('current-queue').innerText = `Antrian Saat Ini: ${event.queue_number}`;
+                });
+        } else {
+            console.error('Echo is not defined');
+        }
+    </script>
 </body>
 </html>

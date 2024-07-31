@@ -44,4 +44,9 @@
             </tbody>
         </table>
     </div>
+    <script>
+        @if (session('status'))
+            toastr.success("{{ session('status') }}");
+        @endif
+    </script>
 </x-layout>

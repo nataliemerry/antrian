@@ -5,6 +5,7 @@ use App\Models\Queue;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Events\QueueCalled;
 
 class QueueController extends Controller
 {
@@ -73,17 +74,20 @@ class QueueController extends Controller
         // Temukan antrian berdasarkan ID
         $queue = Queue::find($id);
         $queue->delete();
-        return redirect('admin/antrian')->with('status', 'Berhasil Mengantri');
+        return redirect('admin/antrian')->with('status', 'Berhasil Menghapus');
     }
 
     public function call($id)
-{
-    $queue = Queue::findOrFail($id);
-    $queue->called_at = now(); // Set waktu saat ini
-    $queue->save();
+    {
+        $queue = Queue::find($id);
+        $queue->called_at = now();
+        $queue->save();
 
-    return response()->json(['message' => 'Antrian telah dipanggil']);
-}
+        // Panggil event broadcasting
+        event(new QueueCalled($queue));
+
+        return redirect()->back()->with('status', 'Antrian berhasil dipanggil');
+    }
 
     private function getServiceCode($serviceName)
     {
@@ -101,15 +105,12 @@ class QueueController extends Controller
 
     private function generateQueueNumber($serviceCode)
     {
-        $today = Carbon::today()->toDateString(); // Mendapatkan tanggal hari ini tanpa waktu
-        Log::info("Today's date: " . $today);
+        $today = Carbon::today()->toDateString();
 
         $lastQueue = Queue::where('service_code', $serviceCode)
             ->whereDate('created_at', $today)
             ->latest('created_at')
             ->first();
-
-        Log::info("Last Queue: " . ($lastQueue ? $lastQueue->queue_number : 'No queues found'));
 
         if ($lastQueue) {
             $lastNumber = (int)str_replace($serviceCode . '-', '', $lastQueue->queue_number);
@@ -117,8 +118,6 @@ class QueueController extends Controller
         } else {
             $nextNumber = 1;
         }
-
-        Log::info("Next Queue Number: " . $nextNumber);
         
         return $serviceCode . '-' . $nextNumber;
     }
