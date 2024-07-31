@@ -1,4 +1,4 @@
-<x-layout title="Dashboard Admin">
+<x-layout-admin title="Dashboard Admin">
     <div class="flex justify-between items-center mb-6 pt-20 ml-64">
         <h1 class="text-3xl font-bold">Dashboard</h1>
     </div>
@@ -41,4 +41,4 @@
             </div>
         </div>
     </div>
-</x-layout>
+</x-layout-admin>

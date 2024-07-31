@@ -1,4 +1,4 @@
-<x-layout title="Admin Antrian">
+<x-layout-admin title="Admin Antrian">
     
 
     <div class="bg-white p-6 rounded-lg shadow mt-20 ml-64">
@@ -46,4 +46,4 @@
             </tbody>
         </table>
     </div>
-</x-layout>
+</x-layout-admin>

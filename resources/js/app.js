@@ -1,3 +1,8 @@
 import './bootstrap';
-require('toastr/build/toastr.min.css');
-window.toastr = require('toastr');
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css';
+window.toastr = toastr;
+
+import $ from 'jquery';
+window.$ = $;
+window.jQuery = $;

@@ -1,4 +1,4 @@
-<x-layout title="Admin Antrian">
+<x-layout-admin title="Admin Antrian">
     <div class="bg-white p-6 rounded-lg shadow mt-20 ml-64">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-3xl font-bold">Layanan Konsultasi</h1>
@@ -44,9 +44,4 @@
             </tbody>
         </table>
     </div>
-    <script>
-        @if (session('status'))
-            toastr.success("{{ session('status') }}");
-        @endif
-    </script>
-</x-layout>
+</x-layout-admin>

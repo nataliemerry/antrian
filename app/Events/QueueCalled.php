@@ -15,23 +15,27 @@ class QueueCalled implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $queue;
+    public $queue_number;
 
-    public function __construct(Queue $queue)
+    /**
+     * Create a new event instance.
+     *
+     * @return void
+     */
+    public function __construct($queue_number)
     {
-        $this->queue = $queue;
+        $this->queue_number = $queue_number;
     }
 
+    /**
+     * Get the channels the event should broadcast on.
+     *
+     * @return \Illuminate\Broadcasting\Channel|array
+     */
     public function broadcastOn()
     {
         return new Channel('queue-channel');
     }
 
-    public function broadcastWith()
-    {
-        return [
-            'queue_number' => $this->queue->queue_number,
-            'called_at' => $this->queue->called_at->toDateTimeString(),
-        ];
-    }
+    
 }
