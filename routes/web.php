@@ -16,6 +16,10 @@ Route::get('/login', function () {
     return view('login');
 });
 
+Route::get('/tiket', function () {
+    return view('tiket');
+});
+
 Route::get('/admin/dashboard', function () {
     return view('dashboard-admin');
 }); //->middleware('auth');
