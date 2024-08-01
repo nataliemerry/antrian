@@ -14,3 +14,6 @@ Route::get('/beranda', function () {
 Route::get('/tiket', function () {
     return view('tiket');
 });
+Route::get('/login', function () {
+    return view('login');
+});
