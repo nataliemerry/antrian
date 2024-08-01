@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\QueueController;
+use App\Http\Controllers\DownloadController;
+use App\Models\Queue;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -52,8 +55,11 @@ Route::get('/admin/lainnya', [QueueController::class, 'lainnya'])->name('lainnya
 
 
 Route::post('/queues', [QueueController::class, 'store']);
+Route::get('/queues', [QueueController::class, 'index'])->name('queues.index');
 
 Route::delete('/queues/{id}', [QueueController::class, 'destroy']);
 Route::patch('/queues/{id}/call', [QueueController::class, 'call']);
 
 Route::get('/admin/dashboard', [QueueController::class, 'dashboard'])->name('dashboard');
+
+Route::get('/queues/download', [DownloadController::class, 'download'])->name('queues.download');

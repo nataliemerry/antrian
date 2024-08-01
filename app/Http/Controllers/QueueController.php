@@ -9,11 +9,29 @@ use App\Events\QueueCalled;
 
 class QueueController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $queues = Queue::all();
+        $range = $request->query('range', 'today');
+        $query = Queue::query();
+
+        switch ($range) {
+            case 'month':
+                $query->whereMonth('created_at', Carbon::now()->month);
+                break;
+            case 'all':
+                // No additional filters for 'all'
+                break;
+            case 'today':
+            default:
+                $query->whereDate('created_at', Carbon::today());
+                break;
+        }
+
+        $queues = $query->get();
+
         return view('antrian-admin', compact('queues'));
     }
+
 
     public function konsultasi()
     {

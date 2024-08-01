@@ -4,17 +4,6 @@
     <div class="bg-white p-6 rounded-lg shadow mt-20 ml-64">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-3xl font-bold">Layanan Lainnya</h1>
-            
-            <div class="flex items-center space-x-4">
-                <button class="bg-orange hover:bg-amber-500 text-white px-4 py-2 rounded-md flex items-center">
-                    Unduh Data
-                    <svg class="ml-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                        <polyline points="7 10 12 15 17 10" />
-                        <line x1="12" y1="15" x2="12" y2="3" />
-                    </svg>
-                </button>
-            </div>
         </div>
 
         <table class="min-w-full bg-white">
@@ -27,8 +16,8 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($queues as $queue)
-                    <tr class="text-gray-700 p-0">
+                @foreach ($queues as $index => $queue)
+                    <tr class="{{ $index % 2 == 0 ? 'bg-white' : 'bg-gray-100' }} text-gray-700 p-0">
                         <td class="w-1/6 text-center py-3 px-4">{{ $queue->queue_number }}</td>
                         <td class="w-1/5 text-center py-3 px-4">{{ $queue->created_at }}</td>
                         <td class="w-1/5 text-center py-3 px-4">{{ $queue->called_at }}</td>

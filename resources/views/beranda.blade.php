@@ -120,6 +120,5 @@
         } else {
             console.error('Echo is not defined');
         }
-
     </script>
 </x-layout>

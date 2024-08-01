@@ -2,16 +2,30 @@
     <div class="bg-white p-6 rounded-lg shadow mt-20 ml-64">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-3xl font-bold">Daftar Antrian</h1>
-            <button class="bg-orange hover:bg-amber-500 text-white px-4 py-2 rounded-md flex items-center">
-                Unduh Data
-                <svg class="ml-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                    <polyline points="7 10 12 15 17 10" />
-                    <line x1="12" y1="15" x2="12" y2="3" />
-                </svg>
-            </button>
-        </div>
+            
+            <div class="flex items-center space-x-4">
+                <!-- Form untuk memilih rentang waktu -->
+                <form action="{{ route('queues.index') }}" method="GET" class="flex items-center space-x-2">
+                    <select name="range" id="range" class="bg-gray-100 border border-gray-300 rounded-md px-4 py-2" onchange="this.form.submit()">
+                        <option value="today" {{ request('range', 'today') == 'today' ? 'selected' : '' }}>Hari Ini</option>
+                        <option value="month" {{ request('range', 'today') == 'month' ? 'selected' : '' }}>Bulan Ini</option>
+                        <option value="all" {{ request('range', 'today') == 'all' ? 'selected' : '' }}>Semua</option>
+                    </select>
+                </form>                
+    
+                <!-- Tombol unduh data -->
+                <a href="{{ route('queues.download', ['range' => request('range')]) }}" class="bg-orange hover:bg-amber-500 text-white px-4 py-2 rounded-md flex items-center">
+                    Unduh Data
+                    <svg class="ml-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                </a>
+            </div>
 
+        </div>
+        
         <table class="min-w-full bg-white">
             <thead>
                 <tr class="w-full bg-birubps text-white">
@@ -24,9 +38,9 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($queues as $queue)
-                    <tr class="text-gray-700 p-0">
-                        <td class="w-1/12 text-center py-2 px-4">{{  $loop->iteration }}</td>
+                @foreach ($queues as $index => $queue)
+                    <tr class="{{ $index % 2 == 0 ? 'bg-white' : 'bg-gray-100' }} text-gray-700 p-0">
+                        <td class="w-1/12 text-center py-2 px-4">{{ $loop->iteration }}</td>
                         <td class="w-1/6 text-center py-3 px-4">{{ $queue->service_name }}</td>
                         <td class="w-1/6 text-center py-3 px-4">{{ $queue->queue_number }}</td>
                         <td class="w-1/5 text-center py-3 px-4">{{ $queue->created_at }}</td>
