@@ -83,11 +83,20 @@ class QueueController extends Controller
         $queue->called_at = now();
         $queue->save();
 
+        // Simpan nomor antrian terakhir yang dipanggil dan layanan terkait dalam sesi
+        session([
+            'last_called_queue' => $queue->queue_number,
+            'last_called_service' => $queue->service_name,
+            'last_called_konsultasi' => $queue->service_name === 'Konsultasi' ? $queue->queue_number : session('last_called_konsultasi', '---'),
+            'last_called_permintaandata' => $queue->service_name === 'Permintaan Data' ? $queue->queue_number : session('last_called_permintaandata', '---'),
+            'last_called_lainnya' => $queue->service_name === 'Lainnya' ? $queue->queue_number : session('last_called_lainnya', '---'),
+        ]);
+
         // Panggil event broadcasting
         event(new QueueCalled($queue));
 
         return redirect()->back()->with('status', 'Antrian berhasil dipanggil');
-    }
+    }   
 
     private function getServiceCode($serviceName)
     {

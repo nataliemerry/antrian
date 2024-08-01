@@ -16,15 +16,17 @@ class QueueCalled implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $queue_number;
+    public $service_name;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($queue_number)
+    public function __construct(Queue $queue)
     {
-        $this->queue_number = $queue_number;
+        $this->queue_number = $queue->queue_number;
+        $this->service_name = $queue->service_name;
     }
 
     /**

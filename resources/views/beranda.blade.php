@@ -13,7 +13,9 @@
                     <h3 class="text-base font-semibold">ANTRIAN SAAT INI</h3>
                 </div>
                 <div class="p-4">
-                    <div id="current-queue" class="text-4xl font-bold text-black">A-1</div>
+                    <div id="current-queue" class="text-4xl font-bold text-black">
+                        {{ session('last_called_queue', '---') }}
+                    </div>
                 </div>
             </div>
             <div class="flex justify-center items-center">
@@ -23,7 +25,9 @@
                             <h3 class="text-base font-semibold text-white">KONSULTASI</h3>
                         </div>
                         <div class="p-4">
-                            <div class="text-3xl font-bold text-black">A-1</div>
+                            <div id="current-konsultasi" class="text-3xl font-bold text-black">
+                                {{ session('last_called_konsultasi', '---') }}
+                            </div>
                         </div>
                     </div>
                     <div class="bg-white rounded-lg inline-block mb-16">
@@ -31,7 +35,9 @@
                             <h3 class="text-base font-semibold text-white">PERMINTAAN DATA</h3>
                         </div>
                         <div class="p-4">
-                            <div class="text-3xl font-bold text-black">B-1</div>
+                            <div id="current-permintaandata" class="text-3xl font-bold text-black">
+                                {{ session('last_called_permintaandata', '---') }}
+                            </div>
                         </div>
                     </div>
                     <div class="bg-white rounded-lg inline-block mb-16">
@@ -39,7 +45,9 @@
                             <h3 class="text-base font-semibold text-white">LAINNYA</h3>
                         </div>
                         <div class="p-4">
-                            <div class="text-3xl font-bold text-black">C-1</div>
+                            <div id="current-lainnya" class="text-3xl font-bold text-black">
+                                {{ session('last_called_lainnya', '---') }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -73,7 +81,6 @@
     </main>
 
     <script type="module">
-
         document.getElementById('popup').addEventListener('change', function() {
             if (this.checked) {
                 document.getElementById('popup-content').style.display = 'flex';
@@ -83,25 +90,36 @@
         });
 
         console.log(window.Echo); // Debugging Echo object
-    if (typeof window.Echo !== 'undefined') {
-        console.log('Echo is defined, attempting to join channel...');
-        let channel = window.Echo.channel('queue-channel');
+        if (typeof window.Echo !== 'undefined') {
+            console.log('Echo is defined, attempting to join channel...');
+            let channel = window.Echo.channel('queue-channel');
 
-        channel.listen('QueueCalled', (event) => {
-            console.log('QueueCalled event received:', event);
-            const queueNumber = event.queue_number.queue_number;
-            document.getElementById('current-queue').innerText = ` ${queueNumber}`;
-            console.log(`Antrian ${queueNumber} berhasil dipanggil.`);
-        });
+            channel.listen('QueueCalled', (event) => {
+                console.log('QueueCalled event received:', event);
+                const queueNumber = event.queue_number;
+                const serviceName = event.service_name;
 
-        channel.error((error) => {
-            console.error('Error subscribing to channel:', error);
-        });
+                document.getElementById('current-queue').innerText = queueNumber;
 
-        console.log('Channel:', channel);
-    } else {
-        console.error('Echo is not defined');
-    }
+                if (serviceName === 'Konsultasi') {
+                    document.getElementById('current-konsultasi').innerText = queueNumber;
+                } else if (serviceName === 'Permintaan Data') {
+                    document.getElementById('current-permintaandata').innerText = queueNumber;
+                } else if (serviceName === 'Lainnya') {
+                    document.getElementById('current-lainnya').innerText = queueNumber;
+                }
+
+                console.log(`Antrian ${queueNumber} untuk ${serviceName} berhasil dipanggil.`);
+            });
+
+            channel.error((error) => {
+                console.error('Error subscribing to channel:', error);
+            });
+
+            console.log('Channel:', channel);
+        } else {
+            console.error('Echo is not defined');
+        }
 
     </script>
 </x-layout>
