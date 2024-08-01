@@ -24,7 +24,7 @@
                                 @csrf
                                 @method('PATCH')
                                 <div class="flex justify-center items-center gap-2">
-                                    <button type="submit" class="bg-hijau hover:bg-lime-500 text-white px-10 py-1 rounded-md text-base">Panggil</button>
+                                    <button type="submit" class="bg-hijau hover:bg-lime-500 text-white px-10 py-1 rounded-md text-base panggil-btn" data-queue-number="{{ $queue->queue_number }}">Panggil</button>
                                 </div>        
                             </form>
                         </td>
@@ -34,3 +34,42 @@
         </table>
     </div>
 </x-layout-admin>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let voices = [];
+        
+        function setVoiceOptions() {
+            voices = speechSynthesis.getVoices();
+            const indonesianFemaleVoice = voices.find(voice => voice.lang.startsWith('id') && voice.name.includes('Female'));
+
+            const buttons = document.querySelectorAll('.panggil-btn');
+
+            buttons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault();
+
+                    const queueNumber = button.getAttribute('data-queue-number');
+                    const utterance = new SpeechSynthesisUtterance(`Nomor antrian ${queueNumber}`);
+
+                    if (indonesianFemaleVoice) {
+                        utterance.voice = indonesianFemaleVoice;
+                    } else {
+                        // Fallback to any Indonesian voice
+                        const indonesianVoice = voices.find(voice => voice.lang.startsWith('id'));
+                        if (indonesianVoice) {
+                            utterance.voice = indonesianVoice;
+                        }
+                    }
+                    
+                    speechSynthesis.speak(utterance);
+
+                    button.closest('form').submit();
+                });
+            });
+        }
+
+        // Wait for voices to be loaded before setting the options
+        speechSynthesis.onvoiceschanged = setVoiceOptions;
+    });
+</script>
