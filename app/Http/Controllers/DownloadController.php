@@ -39,10 +39,12 @@ class DownloadController extends Controller
 
         $callback = function() use ($queues) {
             $handle = fopen('php://output', 'w');
-            fputcsv($handle, ['Nomor Antrian', 'Waktu Antri', 'Waktu Panggil']);
+            fputcsv($handle, ['No', 'Service Name', 'Nomor Antrian', 'Waktu Antri', 'Waktu Panggil']);
 
-            foreach ($queues as $queue) {
+            foreach ($queues as $index => $queue) {
                 fputcsv($handle, [
+                    $index + 1,
+                    $queue->service_name,
                     $queue->queue_number,
                     $queue->created_at,
                     $queue->called_at
