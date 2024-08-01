@@ -1,25 +1,27 @@
+@props(['title' => 'Dashboard', 'bodyClass' => ''])
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'Dashboard Admin' }}</title>
+    <title>{{ $title }}</title>
     @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
 </head>
-<body class="bg-gray-200">
-    <div class="flex h-screen flex-col">
-        <!-- Navbar -->
-        <x-navbar></x-navbar>
+<body class="{{ $bodyClass }}">
 
-        <div class="flex flex-1">
-            <!-- Sidebar -->
-            <x-sidebar></x-sidebar>
+    {{ $slot }}
 
-            <!-- Main Content -->
-            <div class="flex-1 p-10">
-                {{ $slot }}
-            </div>
-        </div>
-    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            @if (session('status'))
+                toastr.options = {
+                    "positionClass": "toast-bottom-right"
+                };
+                toastr.success("{{ session('status') }}");
+            @endif
+        });
+    </script>
 </body>
 </html>

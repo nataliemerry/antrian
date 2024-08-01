@@ -1,4 +1,4 @@
-<x-layout title="Admin Antrian">
+<x-layout-admin title="Admin Antrian">
     
 
     <div class="bg-white p-6 rounded-lg shadow mt-20 ml-64">
@@ -14,14 +14,6 @@
                         <line x1="12" y1="15" x2="12" y2="3" />
                     </svg>
                 </button>
-                <button class="bg-error hover:bg-red-500 text-white px-4 py-2 rounded-md flex items-center">
-                    Reset Data
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 icon icon-tabler icons-tabler-outline icon-tabler-refresh">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
-                        <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
-                    </svg>
-                </button>
             </div>
         </div>
 
@@ -35,31 +27,23 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="text-gray-700 p-0">
-                    <td class="w-1/6 text-center py-3 px-4">C-1</td>
-                    <td class="w-1/5 text-center py-3 px-4">2024-07-17 08:00:00</td>
-                    <td class="w-1/5 text-center py-3 px-4">2024-07-17 08:00:00</td>
-                    <td class="w-1/5 text-center py-3 px-4">
-                        <button class="bg-hijau hover:bg-lime-500 text-white px-10 py-1 rounded-md text-base">Panggil</button>
-                    </td>
-                </tr>
-                <tr class="text-gray-700 p-0">
-                    <td class="w-1/6 text-center py-3 px-4">C-1</td>
-                    <td class="w-1/5 text-center py-3 px-4">2024-07-17 08:00:00</td>
-                    <td class="w-1/5 text-center py-3 px-4">2024-07-17 08:00:00</td>
-                    <td class="w-1/5 text-center py-3 px-4">
-                        <button class="bg-hijau hover:bg-lime-500 text-white px-10 py-1 rounded-md text-base">Panggil</button>
-                    </td>
-                </tr>
-                <tr class="text-gray-700">
-                    <td class="w-1/6 text-center py-3 px-4">C-1</td>
-                    <td class="w-1/5 text-center py-3 px-4">2024-07-17 08:00:00</td>
-                    <td class="w-1/5 text-center py-3 px-4">2024-07-17 08:00:00</td>
-                    <td class="w-1/5 text-center py-3 px-4">
-                        <button class="bg-hijau hover:bg-lime-500 text-white px-10 py-1 rounded-md text-base">Panggil</button>
-                    </td>
-                </tr>
+                @foreach ($queues as $queue)
+                    <tr class="text-gray-700 p-0">
+                        <td class="w-1/6 text-center py-3 px-4">{{ $queue->queue_number }}</td>
+                        <td class="w-1/5 text-center py-3 px-4">{{ $queue->created_at }}</td>
+                        <td class="w-1/5 text-center py-3 px-4">{{ $queue->called_at }}</td>
+                        <td>
+                            <form action="{{ url('/queues/' . $queue->id . '/call') }}" method="post">
+                                @csrf
+                                @method('PATCH')
+                                <div class="flex justify-center items-center gap-2">
+                                    <button type="submit" class="bg-hijau hover:bg-lime-500 text-white px-10 py-1 rounded-md text-base">Panggil</button>
+                                </div>        
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
-</x-layout>
+</x-layout-admin>
