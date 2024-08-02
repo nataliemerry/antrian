@@ -52,7 +52,7 @@
                     event.preventDefault();
 
                     const queueNumber = button.getAttribute('data-queue-number');
-                    const utterance = new SpeechSynthesisUtterance(`Nomor antrian ${queueNumber}`);
+                    const utterance = new SpeechSynthesisUtterance(`Nomor antrian ${queueNumber} silahkan menuju ke resepsionis`);
 
                     if (indonesianFemaleVoice) {
                         utterance.voice = indonesianFemaleVoice;
