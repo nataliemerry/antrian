@@ -50,7 +50,7 @@
                     event.preventDefault();
 
                     const queueNumber = button.getAttribute('data-queue-number');
-                    const utterance = new SpeechSynthesisUtterance(`Nomor antrian ${queueNumber}`);
+                    const utterance = new SpeechSynthesisUtterance(`Nomor antrian ${queueNumber} silahkan menuju ke Pe Es Te`);
 
                     if (indonesianFemaleVoice) {
                         utterance.voice = indonesianFemaleVoice;
