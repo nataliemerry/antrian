@@ -66,7 +66,7 @@
             <div class="bg-white rounded-lg p-8 mb-20 text-center w-11/12 max-w-md mx-auto relative">
                 <label for="popup" class="absolute top-4 right-4 text-gray-500 cursor-pointer text-2xl">&times;</label>
                 <h2 class="text-xl font-bold mb-4">Tambah Antrian</h2>
-                <form action="/queues" method="POST">
+                <form action="/queues" method="POST" target="_blank">
                     @csrf
                     <label for="service_name" class="block mb-2 font-semibold text-left">Pilih Layanan Berikut</label>
                     <select name="service_name" id="service_name" class="mb-6 p-2 border rounded w-full">
@@ -81,44 +81,54 @@
     </main>
 
     <script type="module">
-        document.getElementById('popup').addEventListener('change', function() {
-            if (this.checked) {
-                document.getElementById('popup-content').style.display = 'flex';
+        document.addEventListener('DOMContentLoaded', function () {
+            // Ensure the checkbox is unchecked on page load
+            document.getElementById('popup').checked = false;
+
+            // Toggle popup display based on checkbox state
+            document.getElementById('popup').addEventListener('change', function () {
+                if (this.checked) {
+                    document.getElementById('popup-content').style.display = 'flex';
+                } else {
+                    document.getElementById('popup-content').style.display = 'none';
+                }
+            });
+
+            // Ensure popup content is hidden on page load
+            document.getElementById('popup-content').style.display = 'none';
+
+            // WebSocket logic
+            console.log(window.Echo); // Debugging Echo object
+            if (typeof window.Echo !== 'undefined') {
+                console.log('Echo is defined, attempting to join channel...');
+                let channel = window.Echo.channel('queue-channel');
+
+                channel.listen('QueueCalled', (event) => {
+                    console.log('QueueCalled event received:', event);
+                    const queueNumber = event.queue_number;
+                    const serviceName = event.service_name;
+
+                    document.getElementById('current-queue').innerText = queueNumber;
+
+                    if (serviceName === 'Konsultasi') {
+                        document.getElementById('current-konsultasi').innerText = queueNumber;
+                    } else if (serviceName === 'Permintaan Data') {
+                        document.getElementById('current-permintaandata').innerText = queueNumber;
+                    } else if (serviceName === 'Lainnya') {
+                        document.getElementById('current-lainnya').innerText = queueNumber;
+                    }
+
+                    console.log(`Antrian ${queueNumber} untuk ${serviceName} berhasil dipanggil.`);
+                });
+
+                channel.error((error) => {
+                    console.error('Error subscribing to channel:', error);
+                });
+
+                console.log('Channel:', channel);
             } else {
-                document.getElementById('popup-content').style.display = 'none';
+                console.error('Echo is not defined');
             }
         });
-
-        console.log(window.Echo); // Debugging Echo object
-        if (typeof window.Echo !== 'undefined') {
-            console.log('Echo is defined, attempting to join channel...');
-            let channel = window.Echo.channel('queue-channel');
-
-            channel.listen('QueueCalled', (event) => {
-                console.log('QueueCalled event received:', event);
-                const queueNumber = event.queue_number;
-                const serviceName = event.service_name;
-
-                document.getElementById('current-queue').innerText = queueNumber;
-
-                if (serviceName === 'Konsultasi') {
-                    document.getElementById('current-konsultasi').innerText = queueNumber;
-                } else if (serviceName === 'Permintaan Data') {
-                    document.getElementById('current-permintaandata').innerText = queueNumber;
-                } else if (serviceName === 'Lainnya') {
-                    document.getElementById('current-lainnya').innerText = queueNumber;
-                }
-
-                console.log(`Antrian ${queueNumber} untuk ${serviceName} berhasil dipanggil.`);
-            });
-
-            channel.error((error) => {
-                console.error('Error subscribing to channel:', error);
-            });
-
-            console.log('Channel:', channel);
-        } else {
-            console.error('Echo is not defined');
-        }
     </script>
 </x-layout>
