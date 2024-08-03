@@ -1,4 +1,4 @@
-@props(['title' => 'Sistem Antrian PST'])
+@props(['title' => 'Sistem Antrian PST', 'last_called_konsultasi', 'last_called_permintaandata', 'last_called_lainnya'])
 
 <x-layout :title="$title" bodyClass="overflow-hidden">
     <x-navbar1></x-navbar1>
@@ -14,7 +14,7 @@
                 </div>
                 <div class="p-4">
                     <div id="current-queue" class="text-4xl font-bold text-black">
-                        {{ session('last_called_queue', '---') }}
+                        {{ $current_queue }}
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                         </div>
                         <div class="p-4">
                             <div id="current-konsultasi" class="text-3xl font-bold text-black">
-                                {{ session('last_called_konsultasi', '---') }}
+                                {{ $last_called_konsultasi }}
                             </div>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                         </div>
                         <div class="p-4">
                             <div id="current-permintaandata" class="text-3xl font-bold text-black">
-                                {{ session('last_called_permintaandata', '---') }}
+                                {{ $last_called_permintaandata }}
                             </div>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                         </div>
                         <div class="p-4">
                             <div id="current-lainnya" class="text-3xl font-bold text-black">
-                                {{ session('last_called_lainnya', '---') }}
+                                {{ $last_called_lainnya }}
                             </div>
                         </div>
                     </div>

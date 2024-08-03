@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\berandaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\QueueController;
@@ -11,9 +12,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/beranda', function () {
-    return view('beranda');
-});
+Route::get('/beranda', [berandaController::class, 'showBeranda'])->middleware('guest');
 
 // Route::get('/login', function () {
 //     return view('login');
@@ -63,3 +62,6 @@ Route::patch('/queues/{id}/call', [QueueController::class, 'call'])->middleware(
 Route::get('/admin/dashboard', [QueueController::class, 'dashboard'])->name('dashboard')->middleware('auth');
 
 Route::get('/queues/download', [DownloadController::class, 'download'])->name('queues.download')->middleware('auth');
+
+Route::post('/admin/queue/reset', [QueueController::class, 'reset'])->name('queue.reset')->middleware('auth');
+

@@ -22,6 +22,17 @@
                         <line x1="12" y1="15" x2="12" y2="3" />
                     </svg>
                 </a>
+
+                <form action="{{ route('queue.reset') }}" method="POST">
+                    @csrf
+                    <button class="bg-hijau hover:bg-lime-500 text-white px-4 py-2 rounded-md flex items-center">
+                        Reset
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-refresh ml-2">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
+                        <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
+                    </button>
+                </form>
             </div>
 
         </div>
