@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\QueueController;
 use App\Http\Controllers\DownloadController;
+use App\Http\Controllers\TicketController;
 use App\Models\Queue;
 
 
@@ -19,9 +20,9 @@ Route::get('/beranda', function () {
 //     return view('login');
 // });
 
-Route::get('/tiket', function () {
-    return view('tiket');
-});
+// Route::get('/tiket', function () {
+//     return view('tiket');
+// });
 
 // Route::get('/admin/dashboard', function () {
 //     return view('dashboard-admin');
@@ -63,3 +64,14 @@ Route::patch('/queues/{id}/call', [QueueController::class, 'call'])->middleware(
 Route::get('/admin/dashboard', [QueueController::class, 'dashboard'])->name('dashboard')->middleware('auth');
 
 Route::get('/queues/download', [DownloadController::class, 'download'])->name('queues.download')->middleware('auth');
+
+// Route to handle form submission
+Route::post('/queues', [QueueController::class, 'store'])->name('queues.store');
+
+// Route to show the ticket
+Route::get('/tiket/{id}', [TicketController::class, 'show'])->name('tiket.show');
+
+
+
+
+

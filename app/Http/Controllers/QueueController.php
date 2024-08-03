@@ -85,6 +85,10 @@ class QueueController extends Controller
         ]);
 
         return redirect('beranda')->with('status', 'Berhasil Mengantri');
+
+        // Redirect ke halaman tiket
+        return redirect()->route('tiket.show', ['id' => $queue->id])
+        ->with('status', 'Berhasil Mengantri');
     }
 
     public function destroy($id)
