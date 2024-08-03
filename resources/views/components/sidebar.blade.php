@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<div class="bg-birunavbar text-white w-64 pt-20 fixed top-0 left-0 h-full z-40">
+<div class="bg-birunavbar text-white w-64 pt-19 fixed top-0 left-0 h-full z-40">
     <nav class="mt-0">
         <a href="/admin/dashboard" class="flex items-center px-4 py-4 {{ Request::is('admin/dashboard') ? 'bg-birubps' : '' }}">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none z-10">

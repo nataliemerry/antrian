@@ -1,9 +1,9 @@
 @props(['title' => 'Sistem Antrian PST', 'last_called_konsultasi', 'last_called_permintaandata', 'last_called_lainnya'])
 
 <x-layout :title="$title" bodyClass="overflow-hidden">
-    <x-navbar1></x-navbar1>
+    <x-navbar></x-navbar>
 
-    <main class="bg-cover bg-center h-screen" style="background-image: url('img/bg bps.png'); font-family: 'Poppins', sans-serif;">
+    <main class="bg-cover bg-center h-screen pt-12" style="background-image: url('img/bg bps.png'); font-family: 'Poppins', sans-serif;">
         <div class="container mx-auto text-center py-8">
             <h1 class="text-xl font-semibold text-white">SELAMAT DATANG DI</h1>
             <h2 class="text-3xl font-semibold mb-12 text-white">PELAYANAN STATISTIK TERPADU</h2>
