@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\berandaController;
+use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\QueueController;
@@ -8,6 +10,7 @@ use App\Http\Controllers\TicketController;
 use App\Models\Queue;
 
 
+<<<<<<< HEAD
 Route::get('/', function () {
     return view('welcome');
 });
@@ -43,6 +46,9 @@ Route::get('/beranda', function () {
 // Route::get('/admin/lainnya', function () {
 //     return view('lainnya-admin');
 // })->middleware('auth');
+=======
+Route::get('/beranda', [berandaController::class, 'showBeranda'])->middleware('guest');
+>>>>>>> a70593dc0efbbfa1295ccc729705404a5d677920
 
 Route::get('/login', [LoginController::class, 'index'])->name('login'); //->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
@@ -65,6 +71,7 @@ Route::get('/admin/dashboard', [QueueController::class, 'dashboard'])->name('das
 
 Route::get('/queues/download', [DownloadController::class, 'download'])->name('queues.download')->middleware('auth');
 
+<<<<<<< HEAD
 // Route to handle form submission
 Route::post('/queues', [QueueController::class, 'store'])->name('queues.store');
 
@@ -75,3 +82,28 @@ Route::get('/tiket/{id}', [TicketController::class, 'show'])->name('tiket.show')
 
 
 
+=======
+Route::post('/admin/queue/reset', [QueueController::class, 'reset'])->name('queue.reset')->middleware('auth');
+
+Route::get('/tiket/{id}', [TicketController::class, 'show'])->name('tiket.show');
+
+// Route::get('/admin/dashboard', function () {
+//     return view('dashboard-admin');
+// })->middleware('auth');
+
+// Route::get('/admin/antrian', function () {
+//     return view('antrian-admin');
+// })->middleware('auth');
+
+// Route::get('/admin/konsultasi', function () {
+//     return view('konsultasi-admin');
+// })->middleware('auth');
+
+// Route::get('/admin/permintaandata', function () {
+//     return view('permintaandata-admin');
+// })->middleware('auth');
+
+// Route::get('/admin/lainnya', function () {
+//     return view('lainnya-admin');
+// })->middleware('auth');
+>>>>>>> a70593dc0efbbfa1295ccc729705404a5d677920

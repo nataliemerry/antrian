@@ -1,13 +1,17 @@
 <!-- resources/views/components/navbar.blade.php -->
-<nav class="bg-birunavbar text-white p-4 flex justify-between items-center fixed top-0 left-0 w-full z-50">
+<nav class="bg-birunavbar text-white p-2  flex justify-between items-center fixed top-0 left-0 w-full z-50">
     <div class="flex items-center">
-        <img src="{{ asset('img/logo bps.png') }}" alt="Logo" class="h-12 mr-4">
-        <h1 class="text-xl font-bold" style="font-family: Arial, sans-serif; font-style: italic;">BPS KABUPATEN MAGELANG</h1>
+        <img src="{{ asset('img/logo bps.png') }}" alt="Logo" class="h-10 mr-8">
+        <div class="text-center">
+            <h1 class="text-base font-bold italic" style="font-family: Arial, sans-serif;">BADAN PUSAT STATISTIK</h1>
+            <h1 class="text-base font-bold italic" style="font-family: Arial, sans-serif;">KABUPATEN MAGELANG</h1>
+        </div>
+        
     </div>
     <div class="flex items-center">
         @guest
             <a href="/login" class="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="h-8">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="h-6">
                     <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                 </svg>
             </a>

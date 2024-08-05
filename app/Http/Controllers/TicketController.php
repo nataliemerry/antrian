@@ -22,4 +22,8 @@ class TicketController extends Controller
     ]);
 }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> a70593dc0efbbfa1295ccc729705404a5d677920

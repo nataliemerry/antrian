@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Queue;
+use App\Models\LastCalledQueue;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -84,11 +85,15 @@ class QueueController extends Controller
             'queue_number' => $queueNumber,
         ]);
 
+<<<<<<< HEAD
         return redirect('beranda')->with('status', 'Berhasil Mengantri');
 
         // Redirect ke halaman tiket
         return redirect()->route('tiket.show', ['id' => $queue->id])
         ->with('status', 'Berhasil Mengantri');
+=======
+         return redirect()->route('tiket.show', ['id' => $queue->id]);
+>>>>>>> a70593dc0efbbfa1295ccc729705404a5d677920
     }
 
     public function destroy($id)
@@ -102,23 +107,49 @@ class QueueController extends Controller
     public function call($id)
     {
         $queue = Queue::find($id);
+        if (!$queue) {
+            return redirect()->back()->with('error', 'Antrian tidak ditemukan');
+        }
+
         $queue->called_at = now();
         $queue->save();
 
-        // Simpan nomor antrian terakhir yang dipanggil dan layanan terkait dalam sesi
-        session([
-            'last_called_queue' => $queue->queue_number,
-            'last_called_service' => $queue->service_name,
-            'last_called_konsultasi' => $queue->service_name === 'Konsultasi' ? $queue->queue_number : session('last_called_konsultasi', '---'),
-            'last_called_permintaandata' => $queue->service_name === 'Permintaan Data' ? $queue->queue_number : session('last_called_permintaandata', '---'),
-            'last_called_lainnya' => $queue->service_name === 'Lainnya' ? $queue->queue_number : session('last_called_lainnya', '---'),
-        ]);
+        // Simpan nomor antrian terakhir yang dipanggil dan layanan terkait dalam tabel LastCalledQueue
+        LastCalledQueue::updateOrCreate(
+            ['service_name' => $queue->service_name],
+            ['queue_number' => $queue->queue_number]
+        );
+
+        // Simpan antrian saat ini
+        LastCalledQueue::updateOrCreate(
+            ['is_current' => true],
+            ['queue_number' => $queue->queue_number, 'is_current' => true, 'service_name' => $queue->service_name]
+        );
 
         // Panggil event broadcasting
         event(new QueueCalled($queue));
 
         return redirect()->back()->with('status', 'Antrian berhasil dipanggil');
-    }   
+    }
+
+    public function reset()
+    {
+        // Hapus data antrian yang tersimpan
+        LastCalledQueue::truncate();
+
+        // Atur ulang status antrian di session
+        session([
+            'last_called_queue' => '---',
+            'last_called_konsultasi' => '---',
+            'last_called_permintaandata' => '---',
+            'last_called_lainnya' => '---',
+        ]);
+
+        return redirect()->back()->with('status', 'Antrian berhasil direset');
+    }
+
+
+
 
     private function getServiceCode($serviceName)
     {
