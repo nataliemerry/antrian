@@ -10,8 +10,8 @@
     <div class="bg-white p-8 rounded shadow-md w-full max-w-sm">
         <div class="flex justify-center mb-4">  
             <img
-              src="img/pst.png"
-              alt="logo PST"
+              src="img/logo bps.png"
+              alt="logo BPS"
               class="h-16 w-16"
             />
         </div>

@@ -1,26 +1,25 @@
 @props(['title' => 'Sistem Antrian PST', 'last_called_konsultasi', 'last_called_permintaandata', 'last_called_lainnya'])
 
-<x-layout :title="$title" bodyClass="overflow-hidden">
+<x-layout :title="$title" bodyClass="">
     <x-navbar></x-navbar>
 
-    <main class="bg-cover bg-center h-screen pt-12" style="background-image: url('img/bg bps.png'); font-family: 'Poppins', sans-serif;">
+    <main class="bg-cover bg-center pt-12" style="background-image: url('img/bg bps.png'); font-family: 'Poppins', sans-serif;">
         <div class="container mx-auto text-center py-8">
-            <h1 class="text-xl font-semibold text-white">SELAMAT DATANG DI</h1>
+            <h1 class="mt-4 text-2xl font-semibold text-white">SELAMAT DATANG DI</h1>
             <h2 class="text-3xl font-semibold mb-12 text-white">PELAYANAN STATISTIK TERPADU</h2>
-            
-            <div class="bg-white rounded-lg inline-block mb-10 w-full max-w-xs">
+            <div class="bg-white rounded-lg inline-block mb-30 w-full max-w-lg h-48">
                 <div class="bg-[#D3D3D3] rounded-lg p-2 shadow-lg">
                     <h3 class="text-base font-semibold">ANTRIAN SAAT INI</h3>
                 </div>
-                <div class="p-4">
-                    <div id="current-queue" class="text-4xl font-bold text-black">
+                <div class="p-6">
+                    <div id="current-queue" class="text-6xl font-bold text-black">
                         {{ $current_queue }}
                     </div>
                 </div>
             </div>
             <div class="flex justify-center items-center">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-screen-md">
-                    <div class="bg-white rounded-lg inline-block mb-16">
+                    <div class="bg-white rounded-lg inline-block mt-16 mb-16">
                         <div class="bg-biru rounded-lg p-2 shadow-lg">
                             <h3 class="text-base font-semibold text-white">KONSULTASI</h3>
                         </div>
@@ -30,7 +29,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-white rounded-lg inline-block mb-16">
+                    <div class="bg-white rounded-lg inline-block mt-16 mb-16">
                         <div class="bg-hijau rounded-lg p-2 shadow-lg">
                             <h3 class="text-base font-semibold text-white">PERMINTAAN DATA</h3>
                         </div>
@@ -40,7 +39,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-white rounded-lg inline-block mb-16">
+                    <div class="bg-white rounded-lg inline-block mt-16 mb-16">
                         <div class="bg-orange rounded-lg p-2 shadow-xl">
                             <h3 class="text-base font-semibold text-white">LAINNYA</h3>
                         </div>
@@ -54,10 +53,10 @@
             </div>
         </div>
         <div class="flex justify-center items-center">
-            <p class="text-base font-semibold text-white mb-6">Silahkan klik tombol di bawah ini untuk memilih layanan!</p>
+            <p class="text-base font-semibold text-white mb-2">Silahkan klik tombol di bawah ini untuk memilih layanan!</p>
         </div>
         <div class="flex justify-center items-center">
-            <label for="popup" class="bg-[#567AC8] hover:bg-blue-600 text-white font-bold py-2 px-4 rounded cursor-pointer">Tambah Antrian</label>
+            <label for="popup" class="bg-blue-300 hover:bg-blue-400 text-blue-800 font-bold py-4 px-8 rounded cursor-pointer text-xl">Tambah Antrian</label>
         </div>
 
         <!-- Pop-up -->

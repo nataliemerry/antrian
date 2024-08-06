@@ -8,6 +8,8 @@
     <title>{{ $title }}</title>
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
+    @vite('resources/js/html2canvas.min.js')
+    @vite('resources/js/jspdf.umd.min.js')
 </head>
 <body class="{{ $bodyClass }}">
 
