@@ -9,9 +9,9 @@ use App\Http\Controllers\DownloadController;
 use App\Models\Queue;
 
 
-Route::get('/beranda', [berandaController::class, 'showBeranda'])->middleware('guest');
+Route::get('/', [berandaController::class, 'showBeranda'])->middleware('guest');
 
-Route::get('/login', [LoginController::class, 'index'])->name('login'); //->middleware('guest');
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::post('/logout', [LoginController::class, 'logout']);
