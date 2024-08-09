@@ -95,13 +95,40 @@
                 popupContent.style.display = popupCheckbox.checked ? 'flex' : 'none';
             });
     
-            // Fungsi untuk me-refresh halaman
-            function refreshPage() {
-                location.reload();
-            }
+            // // Fungsi untuk me-refresh halaman
+            // function refreshPage() {
+            //     location.reload();
+            // }
     
-            // Set interval untuk refresh halaman setiap 5 detik (5000 ms)
-            setInterval(refreshPage, 5000);
+            // // Set interval untuk refresh halaman setiap 5 detik (5000 ms)
+            // setInterval(refreshPage, 5000);
+        });
+    </script>
+
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', () => {
+            const refreshInterval = 5000; // Interval polling dalam milidetik (misalnya 5000 ms = 5 detik)
+            
+            function fetchCurrentQueue() {
+                fetch('/api/current-queue')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Update elemen dengan antrian saat ini
+                        document.getElementById('current-queue').textContent = data.current_queue;
+
+                        // Update elemen dengan data antrian yang terakhir dipanggil
+                        document.getElementById('current-konsultasi').textContent = data.last_called_konsultasi;
+                        document.getElementById('current-permintaandata').textContent = data.last_called_permintaandata;
+                        document.getElementById('current-lainnya').textContent = data.last_called_lainnya;
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+
+            // Fetch data saat halaman dimuat pertama kali
+            fetchCurrentQueue();
+
+            // Set interval untuk polling
+            setInterval(fetchCurrentQueue, refreshInterval);
         });
     </script>
     

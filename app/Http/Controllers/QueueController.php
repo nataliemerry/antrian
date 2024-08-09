@@ -193,4 +193,20 @@ class QueueController extends Controller
 
         return view('dashboard-admin', compact('konsultasiCount', 'permintaanDataCount', 'lainnyaCount'));
     }
+
+    public function getCurrentQueue()
+    {
+        $lastCalledKonsultasi = LastCalledQueue::where('service_name', 'Konsultasi')->latest()->first();
+        $lastCalledPermintaanData = LastCalledQueue::where('service_name', 'Permintaan Data')->latest()->first();
+        $lastCalledLainnya = LastCalledQueue::where('service_name', 'Lainnya')->latest()->first();
+        
+        $currentQueue = LastCalledQueue::where('is_current', true)->first();
+        
+        return response()->json([
+            'current_queue' => $currentQueue ? $currentQueue->queue_number : 'N/A',
+            'last_called_konsultasi' => $lastCalledKonsultasi ? $lastCalledKonsultasi->queue_number : 'N/A',
+            'last_called_permintaandata' => $lastCalledPermintaanData ? $lastCalledPermintaanData->queue_number : 'N/A',
+            'last_called_lainnya' => $lastCalledLainnya ? $lastCalledLainnya->queue_number : 'N/A',
+        ]);
+    }
 }

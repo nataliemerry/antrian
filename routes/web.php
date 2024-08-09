@@ -35,6 +35,8 @@ Route::get('/queues/download', [DownloadController::class, 'download'])->name('q
 Route::post('/admin/queue/reset', [QueueController::class, 'reset'])->name('queue.reset')->middleware('auth');
 
 Route::get('/tiket/{id}', [TicketController::class, 'show'])->name('tiket.show');
+Route::get('/api/current-queue', [QueueController::class, 'getCurrentQueue']);
+
 
 // Route::get('/admin/dashboard', function () {
 //     return view('dashboard-admin');
