@@ -3,7 +3,7 @@
 <x-layout :title="$title" bodyClass="">
     <x-navbar></x-navbar>
 
-    <main class="bg-cover bg-center pt-12" style="background-image: url('img/bg bps.png'); font-family: 'Poppins', sans-serif;">
+    <main class="bg-cover bg-center pt-12 h-screen" style="background-image: url('img/bg bps.png'); font-family: 'Poppins', sans-serif;">
         <div class="container mx-auto text-center py-8">
             <h1 class="mt-4 text-2xl font-semibold text-white">SELAMAT DATANG DI</h1>
             <h2 class="text-3xl font-semibold mb-12 text-white">PELAYANAN STATISTIK TERPADU</h2>
@@ -80,54 +80,29 @@
     </main>
 
     <script type="module">
-        document.addEventListener('DOMContentLoaded', function () {
-            // Ensure the checkbox is unchecked on page load
-            document.getElementById('popup').checked = false;
-
-            // Toggle popup display based on checkbox state
-            document.getElementById('popup').addEventListener('change', function () {
-                if (this.checked) {
-                    document.getElementById('popup-content').style.display = 'flex';
-                } else {
-                    document.getElementById('popup-content').style.display = 'none';
-                }
+        document.addEventListener('DOMContentLoaded', () => {
+            const popupCheckbox = document.getElementById('popup');
+            const popupContent = document.getElementById('popup-content');
+    
+            // Pastikan checkbox tidak tercentang saat halaman dimuat
+            popupCheckbox.checked = false;
+    
+            // Menyembunyikan popup content saat halaman dimuat
+            popupContent.style.display = 'none';
+    
+            // Toggle tampilan popup berdasarkan status checkbox
+            popupCheckbox.addEventListener('change', () => {
+                popupContent.style.display = popupCheckbox.checked ? 'flex' : 'none';
             });
-
-            // Ensure popup content is hidden on page load
-            document.getElementById('popup-content').style.display = 'none';
-
-            // WebSocket logic
-            console.log(window.Echo); // Debugging Echo object
-            if (typeof window.Echo !== 'undefined') {
-                console.log('Echo is defined, attempting to join channel...');
-                let channel = window.Echo.channel('queue-channel');
-
-                channel.listen('QueueCalled', (event) => {
-                    console.log('QueueCalled event received:', event);
-                    const queueNumber = event.queue_number;
-                    const serviceName = event.service_name;
-
-                    document.getElementById('current-queue').innerText = queueNumber;
-
-                    if (serviceName === 'Konsultasi') {
-                        document.getElementById('current-konsultasi').innerText = queueNumber;
-                    } else if (serviceName === 'Permintaan Data') {
-                        document.getElementById('current-permintaandata').innerText = queueNumber;
-                    } else if (serviceName === 'Lainnya') {
-                        document.getElementById('current-lainnya').innerText = queueNumber;
-                    }
-
-                    console.log(`Antrian ${queueNumber} untuk ${serviceName} berhasil dipanggil.`);
-                });
-
-                channel.error((error) => {
-                    console.error('Error subscribing to channel:', error);
-                });
-
-                console.log('Channel:', channel);
-            } else {
-                console.error('Echo is not defined');
+    
+            // Fungsi untuk me-refresh halaman
+            function refreshPage() {
+                location.reload();
             }
+    
+            // Set interval untuk refresh halaman setiap 5 detik (5000 ms)
+            setInterval(refreshPage, 5000);
         });
     </script>
+    
 </x-layout>
