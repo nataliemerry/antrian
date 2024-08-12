@@ -106,23 +106,25 @@ class QueueController extends Controller
         $queue->called_at = now();
         $queue->save();
 
+        // Reset all current queues to false regardless of the service
+        LastCalledQueue::where('is_current', true)->update(['is_current' => false]);
+
         // Simpan nomor antrian terakhir yang dipanggil dan layanan terkait dalam tabel LastCalledQueue
         LastCalledQueue::updateOrCreate(
             ['service_name' => $queue->service_name],
             ['queue_number' => $queue->queue_number]
         );
 
-        // Simpan antrian saat ini
+        // Simpan antrian saat ini sebagai current queue
         LastCalledQueue::updateOrCreate(
-            ['is_current' => true],
-            ['queue_number' => $queue->queue_number, 'is_current' => true, 'service_name' => $queue->service_name]
+            ['service_name' => $queue->service_name, 'queue_number' => $queue->queue_number],
+            ['is_current' => true]
         );
-
-        // Panggil event broadcasting
-        event(new QueueCalled($queue));
 
         return redirect()->back()->with('status', 'Antrian berhasil dipanggil');
     }
+
+
 
     public function reset()
     {
@@ -203,10 +205,10 @@ class QueueController extends Controller
         $currentQueue = LastCalledQueue::where('is_current', true)->first();
         
         return response()->json([
-            'current_queue' => $currentQueue ? $currentQueue->queue_number : 'N/A',
-            'last_called_konsultasi' => $lastCalledKonsultasi ? $lastCalledKonsultasi->queue_number : 'N/A',
-            'last_called_permintaandata' => $lastCalledPermintaanData ? $lastCalledPermintaanData->queue_number : 'N/A',
-            'last_called_lainnya' => $lastCalledLainnya ? $lastCalledLainnya->queue_number : 'N/A',
+            'current_queue' => $currentQueue ? $currentQueue->queue_number : '---',
+            'last_called_konsultasi' => $lastCalledKonsultasi ? $lastCalledKonsultasi->queue_number : '---',
+            'last_called_permintaandata' => $lastCalledPermintaanData ? $lastCalledPermintaanData->queue_number : '---',
+            'last_called_lainnya' => $lastCalledLainnya ? $lastCalledLainnya->queue_number : '---',
         ]);
     }
 }

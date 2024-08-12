@@ -3,7 +3,7 @@
 <x-layout :title="$title" bodyClass="">
     <x-navbar></x-navbar>
 
-    <main class="bg-cover bg-center pt-12 h-screen" style="background-image: url('img/bg bps.png'); font-family: 'Poppins', sans-serif;">
+    <main class="bg-cover bg-center pt-12 min-h-screen" style="background-image: url('img/bg bps.png'); font-family: 'Poppins', sans-serif;">
         <div class="container mx-auto text-center py-8">
             <h1 class="mt-4 text-2xl font-semibold text-white">SELAMAT DATANG DI</h1>
             <h2 class="text-3xl font-semibold mb-12 text-white">PELAYANAN STATISTIK TERPADU</h2>
