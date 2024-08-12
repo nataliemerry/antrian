@@ -22,14 +22,14 @@
             Antrian PST
         </p>
 
-        @if(Session::has('loginError'))
+        {{-- @if(Session::has('loginError'))
             <div id="alert" class="relative bg-red-300 text-red-800 border border-red-400 p-4 rounded mb-4 flex items-start">
                 <button class="absolute top-2 right-2 text-red-800 hover:text-red-600" onclick="document.getElementById('alert').style.display='none';">
                     &times;
                 </button>
                 {{ session('loginError') }}
             </div>
-        @endif
+        @endif --}}
 
         <form action="/login" method="POST">
             @csrf
