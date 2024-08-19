@@ -1,5 +1,5 @@
 <!-- resources/views/components/navbar.blade.php -->
-<nav class="bg-birunavbar text-white p-2  flex justify-between items-center fixed top-0 left-0 w-full z-50">
+<nav class="bg-birunavbar text-white p-4  flex justify-between items-center fixed top-0 left-0 w-full z-50">
     <div class="flex items-center">
         <img src="{{ asset('img/logo bps.png') }}" alt="Logo" class="h-10 mr-8">
         <div class="text-center">
@@ -16,27 +16,24 @@
                 </svg>
             </a>
         @else
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-user">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                <path d="M12 2a5 5 0 1 1 -5 5l.005 -.217a5 5 0 0 1 4.995 -4.783z" />
-                <path d="M14 14a5 5 0 0 1 5 5v1a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-1a5 5 0 0 1 5 -5h4z" />
-            </svg>
             <div class="relative">
-                <button id="dropdownButton" class="mx-4 text-white focus:outline-none">Admin</button>
-                <div id="dropdownMenu" class="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded shadow-lg hidden">
-                    <form action="/logout" method="post" class="block px-4 py-2 text-sm hover:bg-gray-200">
-                    @csrf 
-                        <button type="submit">
-                            Logout
-                        </button>
-                    </form>
-                </div>
+                <form action="/logout" method="POST">
+                    @csrf
+                    <button type="submit" class="flex items-center" aria-label="Logout">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 icon icon-tabler icon-tabler-logout mr-3">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                            <path d="M9 12h12l-3 -3" />
+                            <path d="M18 15l3 -3" />
+                        </svg>
+                    </button>
+                </form>
             </div>
         @endguest
     </div>
 </nav>
 
-<script>
+{{-- <script>
     document.getElementById('dropdownButton').addEventListener('click', function() {
         const menu = document.getElementById('dropdownMenu');
         menu.classList.toggle('hidden');
@@ -50,4 +47,4 @@
             menu.classList.add('hidden');
         }
     });
-</script>
+</script> --}}

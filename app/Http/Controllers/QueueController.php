@@ -177,6 +177,7 @@ class QueueController extends Controller
         
         return $serviceCode . '-' . $nextNumber;
     }
+
     public function dashboard()
     {
         $today = Carbon::today()->toDateString();
@@ -190,11 +191,35 @@ class QueueController extends Controller
                                     ->count();
 
         $lainnyaCount = Queue::where('service_name', 'Lainnya')
-                             ->whereDate('created_at', $today)
-                             ->count();
+                            ->whereDate('created_at', $today)
+                            ->count();
 
         return view('dashboard-admin', compact('konsultasiCount', 'permintaanDataCount', 'lainnyaCount'));
     }
+
+    public function getCounts()
+{
+    $today = Carbon::today()->toDateString();
+
+    $konsultasiCount = Queue::where('service_name', 'Konsultasi')
+                            ->whereDate('created_at', $today)
+                            ->count();
+
+    $permintaanDataCount = Queue::where('service_name', 'Permintaan Data')
+                                ->whereDate('created_at', $today)
+                                ->count();
+
+    $lainnyaCount = Queue::where('service_name', 'Lainnya')
+                         ->whereDate('created_at', $today)
+                         ->count();
+
+    return response()->json([
+        'konsultasiCount' => $konsultasiCount,
+        'permintaanDataCount' => $permintaanDataCount,
+        'lainnyaCount' => $lainnyaCount,
+    ]);
+}
+
 
     public function getCurrentQueue()
     {

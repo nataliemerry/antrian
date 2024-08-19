@@ -29,6 +29,8 @@ Route::delete('/queues/{id}', [QueueController::class, 'destroy'])->middleware('
 Route::patch('/queues/{id}/call', [QueueController::class, 'call'])->middleware('auth');
 
 Route::get('/admin/dashboard', [QueueController::class, 'dashboard'])->name('dashboard')->middleware('auth');
+Route::get('/admin/dashboard/counts', [QueueController::class, 'getCounts'])->name('dashboard.counts');
+
 
 Route::get('/queues/download', [DownloadController::class, 'download'])->name('queues.download')->middleware('auth');
 

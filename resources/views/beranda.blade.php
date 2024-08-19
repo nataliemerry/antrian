@@ -94,14 +94,7 @@
             popupCheckbox.addEventListener('change', () => {
                 popupContent.style.display = popupCheckbox.checked ? 'flex' : 'none';
             });
-    
-            // // Fungsi untuk me-refresh halaman
-            // function refreshPage() {
-            //     location.reload();
-            // }
-    
-            // // Set interval untuk refresh halaman setiap 5 detik (5000 ms)
-            // setInterval(refreshPage, 5000);
+
         });
     </script>
 
