@@ -24,31 +24,17 @@
 </x-layout>
 
 <script>
-    document.getElementById('downloadBtn').addEventListener('click', () => {
-        // Pilih elemen yang ingin diunduh
-        const element = document.getElementById('ticket');
-        
-        // Konversi elemen menjadi gambar
-        html2canvas(element).then(canvas => {
-            // Buat PDF menggunakan jsPDF
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            
-            // Definisikan ukuran gambar yang diinginkan dalam mm
-            const imgWidth = 100; // Lebar gambar dalam mm
-            const imgHeight = canvas.height * imgWidth / canvas.width;
-            
-            // Hitung dimensi gambar asli
-            const imgData = canvas.toDataURL('image/png');
-            
-            // Posisi gambar di tengah horizontal dan atas
-            const xOffset = (doc.internal.pageSize.width - imgWidth) / 2;
-            const yOffset = 10; // Margin atas dalam mm
+    let btn = document.getElementById('downloadBtn');
+    let page = document.getElementById('ticket');
 
-            // Tambahkan gambar ke PDF
-            doc.addImage(imgData, 'PNG', xOffset, yOffset, imgWidth, imgHeight);
-            doc.save('tiket-antrian.pdf');
-        });
+    btn.addEventListener('click', function(){
+      html2PDF(page, {
+        jsPDF: {
+          format: 'a4',
+        },
+        imageType: 'image/jpeg',
+        output: 'tiket-antrian.pdf'
+      });
     });
 </script>
 
